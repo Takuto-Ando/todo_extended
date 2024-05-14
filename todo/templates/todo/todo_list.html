@@ -19,19 +19,33 @@
             </tr>
         </thead>
         <tbody>
+            <form method="post">
+                {% csrf_token %}
+                <input type="hidden" name="reset" value="true">
+                <button type="submit">すべて</button>
+            </form>
+            &nbsp;
+            <a href="?status=ongoing">継続中のタスク</a>
+            
+            <!-- スペースをあける -->
+            &nbsp;
+            <a href="?status=completed">完了したタスク</a>
+           
+       
+            </script>
         {% for task in tasks %}
         <tr>
             <td>{{ task.title }}</td>
             <td>{{ task.deadline }}</td>
-            <!-- ステータスを表示-->
             <td>{{ task.get_status_display }}</td>
+            
 
             <td>
-                <a href="{% url 'detail' task.pk %}" class="btn btn-primary">詳細</a>
-                <a href="{% url 'update' task.pk %}" class="btn btn-secondary">編集</a>
-                <a href="{% url 'delete' task.pk %}" class="btn btn-danger">削除</a>
+                <a href="{% url 'detail' task.pk %}" class="btn btn-outline-primary">詳細</a>
+                <a href="{% url 'update' task.pk %}" class="btn btn-outline-secondary">編集</a>
+                <a href="{% url 'delete' task.pk %}" class="btn btn-outline-danger">削除</a>
                 <!-- 完了ボタンを追加 -->
-                <a href="{% url 'complete' task.pk %}" class="btn btn-success">完了</a>
+                <a href="{% url 'complete' task.pk %}" class="btn btn-outline-success">ステータスの変更</a>
 
             </td>
         </tr>
