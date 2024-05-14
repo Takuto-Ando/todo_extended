@@ -1,0 +1,43 @@
+{% extends 'todo/base.html' %}
+
+{% block header %}
+    <h1>Todo List</h1>
+    <p>今日のタスクを作成しましょう！</p>
+    <a class="btn btn-primary" href="{% url 'create' %}">新規作成</a>
+{% endblock header %}
+
+{% block content %}
+<div class="shadow-sm p-3 mb-5 bg-white rounded">
+    <table class="table">
+        <thead>
+            <tr>
+            <th scope="col">タイトル</th>
+            <th scope="col">締切日</th>
+            <!-- ステータスを追加 -->
+            <th scope="col">ステータス</th>
+            <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for task in tasks %}
+        <tr>
+            <td>{{ task.title }}</td>
+            <td>{{ task.deadline }}</td>
+            <!-- ステータスを表示-->
+            <td>{{ task.get_status_display }}</td>
+
+            <td>
+                <a href="{% url 'detail' task.pk %}" class="btn btn-primary">詳細</a>
+                <a href="{% url 'update' task.pk %}" class="btn btn-secondary">編集</a>
+                <a href="{% url 'delete' task.pk %}" class="btn btn-danger">削除</a>
+                <!-- 完了ボタンを追加 -->
+                <a href="{% url 'complete' task.pk %}" class="btn btn-success">完了</a>
+
+            </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock content %}
