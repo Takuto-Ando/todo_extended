@@ -37,7 +37,7 @@ class TodoDetail(DetailView):
 
 class TodoCreate(CreateView):
     model = Todo
-    fields = ["description", "deadline", "title"]
+    fields = ["title","description", "deadline"]
     success_url = reverse_lazy("list")
     def get_form(self, form_class=None):
         form = super().get_form(form_class)
@@ -47,7 +47,7 @@ class TodoCreate(CreateView):
 class TodoUpdate(UpdateView):
     model = Todo
     # status以外のフィールドを編集できるようにする
-    fields = ["description", "deadline", "title"]
+    fields = ["title","description", "deadline"]
     success_url = reverse_lazy("list")
 
 
